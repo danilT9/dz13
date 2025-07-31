@@ -1,192 +1,171 @@
 console.log("--> DZ 12 <--");
 console.log("---");
 let user = {
-    name: "user1",
-    hobby: "swimming",
-    premium: true,
-}
+  name: "user1",
+  hobby: "swimming",
+  premium: true,
+};
 
 const changeUserDatas = (object) => {
-    let objMood = object.mood;
-    objMood = "Happy";
-    let objHobby = object.hobby;
-    objHobby = "skydiving";
-    let objPremium = object.premium;
-    objPremium = false;
+  let { hobby, premium } = object;
+  hobby = "skydiving";
+  premium = false;
+  const mood = "Happy";
 
-    let allValues = [];
-    for(let values in object) {
-        allValues.push(object[values]);
-    }
+  let allValues = [];
+  for (let key in object) {
+    allValues.push(object[key]);
+  }
 
-    const result = []
-    let index = 0;
-    for(let keys of allValues) {
-        index++;
-        result.push(`${keys}:${allValues[index]}`);
-    }
-    const resultToStrings = result.join("\n")
-    return resultToStrings;
-}
-console.log(changeUserDatas(user))
+  const result = [];
+  let index = 0;
+  for (let value of allValues) {
+    index++;
+    result.push(`${value}:${allValues[index]}`);
+  }
 
+  return result.join("\n");
+};
+console.log(changeUserDatas(user));
 
-
-
-
-console.log("---")
+console.log("---");
 function countProps(obj) {
-    const valuesToArray = Object.keys(obj);
-    return valuesToArray.length
+  const keys = Object.keys(obj);
+  return keys.length;
 }
-console.log(countProps(user))
+console.log(countProps(user));
 
-
-
-
-
-
-console.log("---")
+console.log("---");
 let listOfEmployees = {
-    "Name1":5,
-    "Name2":4,
-    "Name3":11,
-    "Name4":7,
-}
+  Name1: 5,
+  Name2: 4,
+  Name3: 11,
+  Name4: 7,
+};
+
 const findBestEmployee = (employees) => {
-    let tasks = Object.values(employees);
-    let names = Object.keys(employees);
-    let namesAndTasks = Object.entries(employees);
+  let tasks = Object.values(employees);
+  let namesAndTasks = Object.entries(employees);
 
-    let maxTasks = tasks[0];
-    for(let i = 0; i < tasks.length; i++) {
-        if (tasks[i] > maxTasks) {
-            maxTasks = tasks[i]
-        }
+  let maxTasks = tasks[0];
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i] > maxTasks) {
+      maxTasks = tasks[i];
     }
-    return namesAndTasks[tasks.indexOf(maxTasks)][0]
-}
-console.log(findBestEmployee(listOfEmployees))
+  }
 
+  const [name] = namesAndTasks[tasks.indexOf(maxTasks)];
+  return name;
+};
+console.log(findBestEmployee(listOfEmployees));
 
-
-
-
-
-console.log("---")
+console.log("---");
 let employeesSalary = {
-    "Name1":5500,
-    "Name2":4000,
-    "Name3":11000,
-    "Name4":7000,
-}
+  Name1: 5500,
+  Name2: 4000,
+  Name3: 11000,
+  Name4: 7000,
+};
 function countTotalSalary(employees) {
-    let employeesSalaryArray = Object.values(employees);
-    let total = 0;
-    for (let i = 0; i < employeesSalaryArray.length; i++) {
-        total += employeesSalaryArray[i];
-    }
-    return total;
+  let employeesSalaryArray = Object.values(employees);
+  let total = 0;
+  for (let i = 0; i < employeesSalaryArray.length; i++) {
+    total += employeesSalaryArray[i];
+  }
+  return total;
 }
 console.log(countTotalSalary(employeesSalary));
 
-
-
-
-
 console.log("---");
 const arrayObjects = [
-    {
-        card: "1234 5678 9012 3456",
-    },
-    {
-        card: "0987 6543 2109 8765"
-    },
-    {
-        card: "5555 5555 5555 5555"
-    }
-]
+  {
+    card: "1234 5678 9012 3456",
+  },
+  {
+    card: "0987 6543 2109 8765",
+  },
+  {
+    card: "5555 5555 5555 5555",
+  },
+];
+
 const getAllPropValues = (arr, prop) => {
-    let res = [];
-    for (let i = 0; i < arr.length; i++) {
-        res.push(arr[i][prop])
-    }
-    return res
-}
-console.log(getAllPropValues(arrayObjects, "card"))
-
-
-
-
+  let res = [];
+  for (let i = 0; i < arr.length; i++) {
+    const { [prop]: value } = arr[i];
+    res.push(value);
+  }
+  return res;
+};
+console.log(getAllPropValues(arrayObjects, "card"));
 
 console.log("---");
 const products = [
-    {
-        name: "Product1",
-        price: 100,
-        amount: 1,
-    },
-    {
-        name: "Product2",
-        price: 200,
-        amount: 2,
-    },
-    {
-        name: "Product3",
-        price: 300,
-        amount: 3,
-    }
-]
+  {
+    name: "Product1",
+    price: 100,
+    amount: 1,
+  },
+  {
+    name: "Product2",
+    price: 200,
+    amount: 2,
+  },
+  {
+    name: "Product3",
+    price: 300,
+    amount: 3,
+  },
+];
+
 function calculateTotalPrice(allProducts, productName) {
-    let objectIndexByName = 0;
-    for (let i = 0; i < allProducts.length; i++) {
-        if (allProducts[i].name === productName) {
-            objectIndexByName = i;
-        }
+  let objectIndexByName = 0;
+  for (let i = 0; i < allProducts.length; i++) {
+    if (allProducts[i].name === productName) {
+      objectIndexByName = i;
     }
-    const result = allProducts[objectIndexByName].price * allProducts[objectIndexByName].amount;
-    return result
+  }
+  const { price, amount } = allProducts[objectIndexByName];
+  const result = price * amount;
+  return result;
 }
 console.log(calculateTotalPrice(products, "Product1"));
-
-
-
-
 
 console.log("---");
 let username = prompt("Username:");
 let balance = Number(prompt("Balance:"));
+
 let accountt = {
-    username,
-    balance,
-    deposit: 0,
-    depBal() {
-        let depBalance = Number(prompt("Скільки хочете внести на депозит?"));
-        this.deposit = this.deposit + depBalance;
-        this.balance = this.balance - depBalance;
-        return "Ваш баланс: " + this.balance + "\nРахунок депозиту: " + this.deposit
-    },
-    withdrawBal() {
-        let withdrawBalance = Number(prompt("Скільки хочете зняти з депозиту?"));
-        if (this.deposit >= withdrawBalance) {
-            this.deposit = this.deposit - withdrawBalance;
-            this.balance = this.balance + withdrawBalance;
-            return "Ваш баланс: " + this.balance + "\nРахунок депозиту: " + this.deposit
-        } else {
-            return "Помилка. У вашому депозитному рахунку недостатньо грошей, щоб зняти " + withdrawBalance + " гривень.\nВаш рахунок депозиту: " + this.deposit
-        }
+  username,
+  balance,
+  deposit: 0,
+
+  depBal() {
+    let depBalance = Number(prompt("Скільки хочете внести на депозит?"));
+    this.deposit += depBalance;
+    this.balance -= depBalance;
+    const { balance, deposit } = this;
+    return `Ваш баланс: ${balance}\nРахунок депозиту: ${deposit}`;
+  },
+
+  withdrawBal() {
+    let withdrawBalance = Number(prompt("Скільки хочете зняти з депозиту?`"));
+    const { deposit, balance } = this;
+
+    if (deposit >= withdrawBalance) {
+      this.deposit -= withdrawBalance;
+      this.balance += withdrawBalance;
+      return `Ваш баланс: ${this.balance}\nРахунок депозиту: ${this.deposit}`;
+    } else {
+      return `Помилка. У вашому депозитному рахунку недостатньо грошей, щоб зняти ${withdrawBalance} гривень.\nВаш рахунок депозиту: ${deposit}`;
     }
-}
-console.log(accountt)
-console.log(accountt.depBal())
-console.log(accountt)
-console.log(accountt.withdrawBal())
-console.log(accountt)
-
-
-
-
-
+  },
+};
+console.log(accountt);
+console.log(accountt.depBal());
+console.log(accountt);
+console.log(accountt.withdrawBal());
+console.log(accountt);
 
 console.log("--> DZ 13 <--");
 /*
@@ -194,11 +173,11 @@ console.log("--> DZ 13 <--");
  * Можна покласти або зняти гроші з рахунку.
  */
 const Transaction = {
-  DEPOSIT: 'deposit',
-  WITHDRAW: 'withdraw',
+  DEPOSIT: "deposit",
+  WITHDRAW: "withdraw",
 };
-const transactionDep = Transaction.DEPOSIT
-const transactionWithdraw = Transaction.WITHDRAW
+const transactionDep = Transaction.DEPOSIT;
+const transactionWithdraw = Transaction.WITHDRAW;
 
 /*
  * Кожна транзакція - це об'єкт з властивостями: id, type і amount
@@ -218,10 +197,10 @@ const account = {
 
   createTransaction(amount, type) {
     let transaction = {
-        id: this.id++,
-        amount,
-        type,
-    }
+      id: this.id++,
+      amount,
+      type,
+    };
     return this.transactions.push(transaction);
   },
   /*
@@ -233,7 +212,7 @@ const account = {
   deposit(amount) {
     this.createTransaction(amount, transactionDep);
     this.balance += amount;
-    return this.balance
+    return this.balance;
   },
 
   /*
@@ -248,10 +227,10 @@ const account = {
   withdraw(amount) {
     this.createTransaction(amount, transactionWithdraw);
     if (this.balance >= amount) {
-        this.balance -= amount
-        return this.balance
+      this.balance -= amount;
+      return this.balance;
     } else {
-        return "Зняття такої суми не можливо, недостатньо коштів.";
+      return "Зняття такої суми не можливо, недостатньо коштів.";
     }
   },
 
@@ -259,13 +238,13 @@ const account = {
    * Метод повертає поточний баланс
    */
   getBalance() {
-    return this.balance
+    return this.balance;
   },
   /*
    * Метод шукає і повертає об'єкт транзакції по id
    */
   getTransactionDetails(id) {
-    return this.transactions.filter(transaction => transaction.id === id);
+    return this.transactions.filter((transaction) => transaction.id === id);
   },
 
   /*
@@ -274,12 +253,14 @@ const account = {
    * певного типу транзакції з усієї історії транзакцій
    */
   getTransactionTotal(type) {
-    const transct = this.transactions.filter(transaction => transaction.type === type);
+    const transct = this.transactions.filter(
+      (transaction) => transaction.type === type,
+    );
     let total = 0;
     for (let i = 0; i < transct.length; i++) {
-        total += transct[i]['amount']
-    };
-    return total
+      total += transct[i]["amount"];
+    }
+    return total;
   },
 };
 const amount = Number(prompt("Amount:"));
@@ -287,7 +268,9 @@ const amount1 = Number(prompt("Amount:"));
 console.log(account.deposit(amount));
 console.log(account.withdraw(amount1));
 console.log(account.getBalance());
-const transactionId = Number(prompt("Transaction id:"))
+const transactionId = Number(prompt("Transaction id:"));
 console.log(account.getTransactionDetails(transactionId));
-const getTransactionTotalType = prompt("Get transactions total - deposit/withdraw?")
-console.log(account.getTransactionTotal(getTransactionTotalType))
+const getTransactionTotalType = prompt(
+  "Get transactions total - deposit/withdraw?",
+);
+console.log(account.getTransactionTotal(getTransactionTotalType));
